@@ -145,8 +145,6 @@
   font-size: 0.95rem;
   transition: background-color 0.2s, transform 0.2s;
   border: 1px solid transparent;
-}
-@utility btn-primary {
   &:hover {
     background-color: var(--color-forest-deep);
     transform: translateY(-1px);
@@ -166,8 +164,6 @@
   font-weight: 500;
   font-size: 0.95rem;
   transition: all 0.2s;
-}
-@utility btn-outline {
   &:hover {
     background-color: var(--color-muted);
   }
