@@ -265,7 +265,15 @@ function PhotoSlideshow() {
 }
 
 function QuickLinksPreview() {
-  const links = ["Health Forms", "Online Payments", "Scoutbook", "TroopTrack", "Youth Protection", "Merit Badges"];
+  const links = [
+    { label: "Health Forms", href: "https://filestore.scouting.org/filestore/healthsafety/pdf/680-001_ab.pdf" },
+    { label: "Online Payments", href: "/quick-links" },
+    { label: "Scoutbook", href: "/quick-links" },
+    { label: "TroopTrack", href: "/quick-links" },
+    { label: "Youth Protection", href: "/quick-links" },
+    { label: "Merit Badges", href: "/quick-links" },
+  ];
+  const healthForms = links[0];
   return (
     <section className="py-24">
       <div className="container-page">
@@ -277,16 +285,20 @@ function QuickLinksPreview() {
           <Link to="/quick-links" className="btn-outline">All quick links <ArrowRight size={16} /></Link>
         </div>
         <div className="mt-10 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-          {links.map((l) => (
-            <Link
-              key={l}
-              to="/quick-links"
-              className="group flex items-center justify-between rounded-xl border border-border bg-card p-5 transition-colors hover:border-forest"
-            >
-              <span className="font-medium">{l}</span>
-              <ArrowRight size={16} className="text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-forest" />
-            </Link>
-          ))}
+          {links.map((l) => {
+            const external = l.href.startsWith("http");
+            const El = external ? "a" : Link;
+            return (
+              <El
+                key={l.label}
+                {...(external ? { href: l.href, target: "_blank", rel: "noopener noreferrer" } : { to: l.href })}
+                className="group flex items-center justify-between rounded-xl border border-border bg-card p-5 transition-colors hover:border-forest"
+              >
+                <span className="font-medium">{l.label}</span>
+                <ArrowRight size={16} className="text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-forest" />
+              </El>
+            );
+          })}
         </div>
       </div>
     </section>
