@@ -273,7 +273,6 @@ function QuickLinksPreview() {
     { label: "Youth Protection", href: "/quick-links" },
     { label: "Merit Badges", href: "/quick-links" },
   ];
-  const healthForms = links[0];
   return (
     <section className="py-24">
       <div className="container-page">
