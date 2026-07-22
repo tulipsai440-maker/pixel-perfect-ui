@@ -53,7 +53,7 @@ function Hero() {
   return (
     <section className="relative isolate overflow-hidden">
       <img
-        src={heroImg}
+        src={heroImg.url}
         alt="Scouts on a mountain ridge at sunrise"
         width={1920}
         height={1200}
