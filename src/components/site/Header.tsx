@@ -15,14 +15,14 @@ export function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
-      <div className="container-page flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-forest text-cream shadow-sm">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2 4 20h16z"/><path d="M12 8v8"/></svg>
+      <div className="container-page flex h-20 items-center justify-between">
+        <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+          <span className="grid h-12 w-12 place-items-center rounded-full bg-forest text-cream shadow-sm">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2 4 20h16z"/><path d="M12 8v8"/></svg>
           </span>
           <div className="leading-tight">
-            <div className="font-display text-lg font-semibold text-foreground">Troop 2001</div>
-            <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Naples · FL</div>
+            <div className="font-display text-xl font-semibold text-foreground">Troop 2001</div>
+            <div className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">Naples · FL</div>
           </div>
         </Link>
 
