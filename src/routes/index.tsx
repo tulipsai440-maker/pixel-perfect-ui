@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const slides = [heroImg, adventureImg, canoeImg, campingImg, hikingImg, flagImg];
+const slides = [heroImg.url, adventureImg, canoeImg, campingImg, hikingImg, flagImg];
 
 const events = [
   { date: "Aug 09", title: "Summer Court of Honor", where: "Fire Station #45" },
