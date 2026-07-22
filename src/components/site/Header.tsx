@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import logoAsset from "@/assets/troop-2001-logo.png.asset.json";
 
 const nav = [
   { to: "/about", label: "About Us" },
