@@ -73,6 +73,9 @@ function Hero() {
               Since 2000, Troop 2001 has helped young people in Naples grow into leaders through
               camping, service, and the rank of Eagle Scout.
             </p>
+            <p className="mt-4 max-w-xl text-base font-medium leading-relaxed text-cream md:text-lg">
+              We inspire boys to become confident explorers, engaged citizens, and ethical leaders.
+            </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/join" className="btn-primary bg-gold !text-forest-deep hover:!bg-gold hover:brightness-110">
                 Join Troop 2001 <ArrowRight size={16} />
