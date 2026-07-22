@@ -17,14 +17,14 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
       <div className="container-page flex h-20 items-center justify-between">
-        <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <span className="grid h-12 w-12 place-items-center rounded-full bg-forest text-cream shadow-sm">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2 4 20h16z"/><path d="M12 8v8"/></svg>
-          </span>
-          <div className="leading-tight">
-            <div className="font-display text-xl font-semibold text-foreground">Troop 2001</div>
-            <div className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">Naples · FL</div>
-          </div>
+        <Link to="/" className="flex items-center" onClick={() => setOpen(false)}>
+          <img
+            src={logoAsset.url}
+            alt="Boy Scouts of America Troop 2001 Naples"
+            width={56}
+            height={56}
+            className="h-14 w-auto object-contain"
+          />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
