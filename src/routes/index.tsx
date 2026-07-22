@@ -61,7 +61,7 @@ function Hero() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-forest-deep/55 to-forest-deep/85" />
       <div className="relative">
-        <div className="container-page flex min-h-[86vh] flex-col justify-end pb-16 pt-32 text-cream md:min-h-[92vh] md:pb-24">
+        <div className="container-page flex min-h-[86vh] flex-col items-center justify-end pb-16 pt-32 text-center text-cream md:min-h-[92vh] md:pb-24">
           <div className="max-w-3xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cream/25 bg-cream/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-gold" /> Scouts BSA · Naples, FL
@@ -69,14 +69,14 @@ function Hero() {
             <h1 className="font-display text-5xl leading-[1.02] text-cream md:text-7xl">
               Adventure begins <em className="not-italic text-gold">on the trail</em>.
             </h1>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-cream/85 md:text-lg">
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-cream/85 md:text-lg">
               Since 2000, Troop 2001 has helped young people in Naples grow into leaders through
               camping, service, and the rank of Eagle Scout.
             </p>
-            <p className="mt-4 max-w-xl text-base font-medium leading-relaxed text-cream md:text-lg">
+            <p className="mx-auto mt-4 max-w-xl text-base font-medium leading-relaxed text-cream md:text-lg">
               We inspire boys to become confident explorers, engaged citizens, and ethical leaders.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link to="/join" className="btn-primary bg-gold !text-forest-deep hover:!bg-gold hover:brightness-110">
                 Join Troop 2001 <ArrowRight size={16} />
               </Link>
@@ -86,7 +86,7 @@ function Hero() {
             </div>
           </div>
 
-          <div className="mt-16 grid gap-6 border-t border-cream/15 pt-8 md:grid-cols-3">
+          <div className="mt-16 grid w-full max-w-3xl gap-6 border-t border-cream/15 pt-8 text-center md:grid-cols-3">
             <Stat label="Founded" value="2000" />
             <Stat label="Meets" value="Wed · 7 PM" />
             <Stat label="Location" value="Fire Station #45" />
