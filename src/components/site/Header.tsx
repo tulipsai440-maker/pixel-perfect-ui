@@ -17,15 +17,22 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
       <div className="container-page flex h-20 items-center justify-between">
-        <Link to="/" className="flex items-center" onClick={() => setOpen(false)}>
-          <img
-            src={logoAsset.url}
-            alt="Boy Scouts of America Troop 2001 Naples"
-            width={56}
-            height={56}
-            className="h-14 w-auto object-contain"
-          />
+        <Link to="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+          <span className="grid place-items-center rounded-full bg-cream ring-1 ring-border p-1.5 shadow-sm">
+            <img
+              src={logoAsset.url}
+              alt="Boy Scouts of America Troop 2001 Naples"
+              width={72}
+              height={72}
+              className="h-16 w-16 object-contain md:h-[72px] md:w-[72px]"
+            />
+          </span>
+          <span className="hidden sm:flex flex-col leading-tight">
+            <span className="font-display text-lg md:text-xl text-forest-deep">Troop 2001</span>
+            <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">Naples, FL</span>
+          </span>
         </Link>
+
 
         <nav className="hidden items-center gap-1 lg:flex">
           {nav.map((i) => (
