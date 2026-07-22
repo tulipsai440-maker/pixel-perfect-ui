@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
-import heroImg from "@/assets/hero.jpg";
+import heroImg from "@/assets/troop-summit.jpg.asset.json";
 import eagleImg from "@/assets/eagle.jpg";
 import adventureImg from "@/assets/adventure.jpg";
 import canoeImg from "@/assets/canoe.jpg";
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const slides = [heroImg, adventureImg, canoeImg, campingImg, hikingImg, flagImg];
+const slides = [heroImg.url, adventureImg, canoeImg, campingImg, hikingImg, flagImg];
 
 const events = [
   { date: "Aug 09", title: "Summer Court of Honor", where: "Fire Station #45" },
@@ -53,7 +53,7 @@ function Hero() {
   return (
     <section className="relative isolate overflow-hidden">
       <img
-        src={heroImg}
+        src={heroImg.url}
         alt="Scouts on a mountain ridge at sunrise"
         width={1920}
         height={1200}
