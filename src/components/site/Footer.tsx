@@ -1,14 +1,21 @@
 import { Link } from "@tanstack/react-router";
 import { MapPin, Clock, Mail } from "lucide-react";
+import logoAsset from "@/assets/troop-2001-logo.png.asset.json";
 
 export function Footer() {
   return (
     <footer className="mt-24 border-t border-border/60 bg-forest-deep text-cream">
       <div className="container-page grid gap-10 py-14 md:grid-cols-3">
         <div>
-          <div className="flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-cream/10 text-cream">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2 4 20h16z"/><path d="M12 8v8"/></svg>
+          <div className="flex items-center gap-3">
+            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-cream p-1.5 ring-1 ring-cream/30 shadow-sm">
+              <img
+                src={logoAsset.url}
+                alt="Boy Scouts of America Troop 2001 Naples"
+                width={48}
+                height={48}
+                className="h-11 w-11 object-contain"
+              />
             </span>
             <div>
               <div className="font-display text-lg font-semibold">Troop 2001</div>
