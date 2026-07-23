@@ -7,8 +7,9 @@ import canoeImg from "@/assets/canoe.jpg";
 import campingImg from "@/assets/camping.jpg";
 import hikingImg from "@/assets/hiking.jpg";
 import flagImg from "@/assets/flag.jpg";
-import { ArrowRight, Calendar, Compass, Award, ChevronRight } from "lucide-react";
+import { ArrowRight, Calendar, Compass, Award, ChevronRight, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
+import { fetchUpcomingEvents, type EventRow } from "@/lib/events";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,12 +23,6 @@ export const Route = createFileRoute("/")({
 });
 
 const slides = [heroImg.url, adventureImg, canoeImg, campingImg, hikingImg, flagImg];
-
-const events = [
-  { date: "Aug 09", title: "Summer Court of Honor", where: "Fire Station #45" },
-  { date: "Aug 16", title: "Backpacking Prep Night", where: "Fire Station #45" },
-  { date: "Aug 23–25", title: "Big Cypress Weekend Campout", where: "Big Cypress" },
-];
 
 const announcements = [
   "Registration is open for Fall camping season — see the Calendar for dates.",
@@ -86,10 +81,16 @@ function Hero() {
             </div>
           </div>
 
-          <div className="mt-16 grid w-full max-w-3xl gap-6 border-t border-cream/15 pt-8 text-center md:grid-cols-3">
+          <div className="mt-16 grid w-full max-w-4xl gap-6 border-t border-cream/15 pt-8 text-left md:grid-cols-3">
             <Stat label="Founded" value="2000" />
-            <Stat label="Meets" value="Wed · 7 PM" />
-            <Stat label="Location" value="Fire Station #45" />
+            <Stat label="Meets" value="Wednesdays · 7:00 PM" />
+            <div>
+              <div className="text-[11px] uppercase tracking-[0.22em] text-cream/60 flex items-center gap-1.5"><MapPin size={12} /> Meeting Location</div>
+              <div className="mt-1 font-display text-lg leading-tight text-cream md:text-xl">
+                North Collier Fire Station #45<br/>
+                <span className="text-base text-cream/85 md:text-lg">1885 Veterans Park Dr, Naples, FL 34109</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -178,6 +179,11 @@ function AdventureSection() {
 }
 
 function EventsAndAnnouncements() {
+  const [events, setEvents] = useState<EventRow[]>([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetchUpcomingEvents(4).then((rows) => { setEvents(rows); setLoading(false); }).catch(() => setLoading(false));
+  }, []);
   return (
     <section className="py-24">
       <div className="container-page grid gap-12 lg:grid-cols-5">
@@ -185,19 +191,28 @@ function EventsAndAnnouncements() {
           <div className="eyebrow">Upcoming</div>
           <h2 className="mt-3 font-display text-4xl md:text-5xl">On the calendar.</h2>
           <ul className="mt-8 divide-y divide-border rounded-2xl border border-border bg-card">
-            {events.map((e) => (
-              <li key={e.title} className="flex flex-wrap items-center gap-6 p-5">
-                <div className="grid h-16 w-16 shrink-0 place-items-center rounded-xl bg-forest text-cream">
-                  <Calendar size={20} />
-                </div>
-                <div className="flex-1 min-w-[200px]">
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">{e.date}</div>
-                  <div className="font-display text-xl text-foreground">{e.title}</div>
-                  <div className="text-sm text-muted-foreground">{e.where}</div>
-                </div>
-                <Link to="/events" className="text-sm font-medium text-forest hover:underline">Details →</Link>
-              </li>
-            ))}
+            {events.map((e) => {
+              const d = new Date(e.starts_at);
+              const date = d.toLocaleString("en-US", { month: "short", day: "numeric" });
+              const time = d.toLocaleString("en-US", { hour: "numeric", minute: "2-digit" });
+              return (
+                <li key={e.id} className="grid grid-cols-[auto_1fr_auto] items-center gap-4 p-5 md:gap-6">
+                  <div className="grid h-16 w-16 shrink-0 place-items-center rounded-xl bg-forest text-cream">
+                    <Calendar size={20} />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-xs uppercase tracking-widest text-muted-foreground">{date} · {time}</div>
+                    <div className="font-display text-lg text-foreground md:text-xl">{e.title}</div>
+                    {e.location && <div className="truncate text-sm text-muted-foreground">{e.location}</div>}
+                  </div>
+                  <Link to="/calendar" className="shrink-0 text-sm font-medium text-forest hover:underline">Details →</Link>
+                </li>
+              );
+            })}
+            {loading && <li className="p-6 text-sm text-muted-foreground">Loading events…</li>}
+            {!loading && events.length === 0 && (
+              <li className="p-6 text-sm text-muted-foreground">No upcoming events yet.</li>
+            )}
           </ul>
           <div className="mt-6">
             <Link to="/calendar" className="btn-outline">See full calendar <ArrowRight size={16} /></Link>
