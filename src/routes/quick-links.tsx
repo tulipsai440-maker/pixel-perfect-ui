@@ -15,23 +15,28 @@ export const Route = createFileRoute("/quick-links")({
   component: QuickLinksPage,
 });
 
-type LinkItem = { label: string; href: string; icon: ComponentType<{ size?: number }>; desc: string };
+type LinkItem = {
+  label: string;
+  href: string | null;
+  icon: ComponentType<{ size?: number }>;
+  desc: string;
+};
 
 const links: LinkItem[] = [
-  { label: "Health Forms", href: "https://www.scouting.org/health-and-safety/ahmr/", icon: FileText, desc: "Annual Health & Medical Record forms A, B, and C." },
-  { label: "Online Payments", href: "#", icon: CreditCard, desc: "Pay dues, camp fees, and event costs online." },
+  { label: "Health Forms", href: "https://filestore.scouting.org/filestore/healthsafety/pdf/680-001_ab.pdf", icon: FileText, desc: "Annual Health & Medical Record — Parts A & B (PDF from Scouting America)." },
   { label: "Scouting America", href: "https://www.scouting.org/", icon: Globe, desc: "National Scouting America website." },
   { label: "Gulf Coast Council", href: "https://www.gulfcoastcouncil.org/", icon: MapPin, desc: "Our local Scouts BSA council." },
-  { label: "Scoutbook", href: "https://www.scoutbook.com/", icon: BookOpen, desc: "Advancement tracking and unit management." },
+  { label: "Scoutbook", href: "https://scoutbook.scouting.org/", icon: BookOpen, desc: "Advancement tracking and unit management." },
   { label: "TroopTrack", href: "https://www.trooptrack.com/", icon: ClipboardList, desc: "Attendance, calendar, and communications." },
-  { label: "Youth Protection", href: "https://www.scouting.org/training/youth-protection/", icon: Shield, desc: "Required training for adult leaders." },
+  { label: "Youth Protection Training", href: "https://www.scouting.org/training/youth-protection/", icon: Shield, desc: "Required training for adult leaders." },
   { label: "Merit Badge Resources", href: "https://www.scouting.org/skills/merit-badges/", icon: Award, desc: "Merit badge worksheets, pamphlets, and counselors." },
   { label: "Guide to Safe Scouting", href: "https://www.scouting.org/health-and-safety/gss/", icon: Shield, desc: "Health and safety guidelines for all activities." },
-  { label: "Camping Checklist", href: "#", icon: ClipboardList, desc: "What to bring for weekend and long-term campouts." },
-  { label: "Forms", href: "#", icon: FileText, desc: "Permission slips, medical, and troop-specific forms." },
-  { label: "Documents", href: "#", icon: Folder, desc: "Troop handbook, bylaws, and reference documents." },
-  { label: "Newsletter", href: "#", icon: Newspaper, desc: "Monthly troop newsletter archive." },
-  { label: "Photo Gallery", href: "#", icon: Images, desc: "Photos from campouts, ceremonies, and service." },
+  { label: "Online Payments", href: null, icon: CreditCard, desc: "Pay dues, camp fees, and event costs online." },
+  { label: "Camping Checklist", href: null, icon: ClipboardList, desc: "What to bring for weekend and long-term campouts." },
+  { label: "Forms", href: null, icon: FileText, desc: "Permission slips and troop-specific forms." },
+  { label: "Documents", href: null, icon: Folder, desc: "Troop handbook, bylaws, and reference documents." },
+  { label: "Newsletter", href: null, icon: Newspaper, desc: "Monthly troop newsletter archive." },
+  { label: "Photo Gallery", href: null, icon: Images, desc: "Photos from campouts, ceremonies, and service." },
 ];
 
 function QuickLinksPage() {
@@ -46,25 +51,42 @@ function QuickLinksPage() {
         <div className="container-page grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {links.map((l) => {
             const Icon = l.icon;
-            const external = l.href.startsWith("http");
-            return (
-              <a
-                key={l.label}
-                href={l.href}
-                target={external ? "_blank" : undefined}
-                rel={external ? "noopener noreferrer" : undefined}
-                className="group flex gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-forest"
-              >
+            const comingSoon = !l.href;
+            const external = l.href?.startsWith("http");
+            const inner = (
+              <>
                 <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-forest/10 text-forest">
                   <Icon size={20} />
                 </div>
                 <div className="flex-1">
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-2">
                     <div className="font-display text-lg">{l.label}</div>
                     {external && <ExternalLink size={13} className="text-muted-foreground" />}
+                    {comingSoon && (
+                      <span className="ml-auto rounded-full bg-gold/25 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-forest-deep">
+                        Coming soon
+                      </span>
+                    )}
                   </div>
                   <p className="mt-1 text-sm text-muted-foreground">{l.desc}</p>
                 </div>
+              </>
+            );
+            const base = "group flex gap-4 rounded-2xl border border-border bg-card p-6 shadow-sm transition-all";
+            if (comingSoon) {
+              return (
+                <div key={l.label} className={`${base} opacity-70`}>{inner}</div>
+              );
+            }
+            return (
+              <a
+                key={l.label}
+                href={l.href!}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noopener noreferrer" : undefined}
+                className={`${base} hover:-translate-y-0.5 hover:border-forest`}
+              >
+                {inner}
               </a>
             );
           })}
